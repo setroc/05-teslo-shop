@@ -1,9 +1,21 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import NextLink from 'next/link';
+import { useRouter } from "next/router";
+
 import { AppBar, Badge, Box, Button, IconButton, Link, Toolbar, Typography } from "@mui/material";
 import { SearchOutlined, ShoppingCartOutlined } from "@mui/icons-material";
 
 export const Navbar:FC = () => {
+
+  const [url, setUrl] = useState('');
+  const {pathname} = useRouter();
+  useEffect(() => {
+    
+    setUrl(pathname.slice(10));
+  }, []);
+  
+
+
   return (
     <AppBar>
       <Toolbar>
@@ -33,19 +45,19 @@ export const Navbar:FC = () => {
         >
           <NextLink href='/category/men' passHref>
             <Link>
-              <Button>Hombres</Button>
+              <Button color={url==="men" ? "primary" : undefined} >Hombres</Button>
             </Link>
           </NextLink>
 
           <NextLink href='/category/women' passHref>
             <Link>
-              <Button>Mujeres</Button>
+              <Button color={url==="men" ? "primary" : undefined} >Mujeres</Button>
             </Link>
           </NextLink>
 
           <NextLink href='/category/kid' passHref>
             <Link>
-              <Button>Niños</Button>
+              <Button color={url==="men" ? "primary" : undefined} >Niños</Button>
             </Link>
           </NextLink>
         </Box>
